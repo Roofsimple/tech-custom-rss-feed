@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #4f8ef7;
+      --accent-dim: #1e3a6e;
+      --text: #e2e4ed;
+      --muted: #7b7f96;
+      --security: #f97316;
+      --tech: #22d3ee;
+      --tag-bg: #1e2535;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      max-width: 860px;
+      margin: 0 auto 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    header .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    header .stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .stat strong {
+      color: var(--text);
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    /* Category nav */
+    .category-nav {
+      max-width: 860px;
+      margin: 0 auto 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Category section */
+    .category-section {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+    }
+
+    .category-label.Security { background: rgba(249,115,22,0.15); color: var(--security); }
+    .category-label.Tech     { background: rgba(34,211,238,0.12); color: var(--tech); }
+
+    .category-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Article cards */
+    .articles {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .article {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      transition: border-color 0.15s;
+    }
+
+    .article:hover { border-color: var(--accent-dim); }
+
+    .article-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .article a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.93rem;
+      font-weight: 500;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .article a:hover { color: var(--accent); }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .source-tag {
+      font-size: 0.72rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .pub-time {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .summary {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      max-width: 860px;
+      margin: 3rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>{{ title }}</h1>
+  <p class="meta">Last updated {{ generated_at }} · Articles from the past {{ max_age_hours }} hours</p>
+  <div class="stats">
+    <div class="stat"><strong>{{ total }}</strong> articles</div>
+    {% for cat, articles in grouped.items() %}
+    <div class="stat"><strong>{{ articles|length }}</strong> {{ cat }}</div>
+    {% endfor %}
+  </div>
+</header>
+
+<nav class="category-nav">
+  {% for cat in grouped.keys() %}
+  <a class="cat-btn" href="#{{ cat }}">{{ cat }}</a>
+  {% endfor %}
+</nav>
+
+{% for category, articles in grouped.items() %}
+<section class="category-section" id="{{ category }}">
+  <div class="category-header">
+    <span class="category-label {{ category }}">{{ category }}</span>
+    <span class="category-count">{{ articles|length }} articles</span>
+  </div>
+
+  <div class="articles">
+    {% for article in articles %}
+    <div class="article">
+      <div class="article-top">
+        <a href="{{ article.link }}" target="_blank" rel="noopener">{{ article.title }}</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">{{ article.source }}</span>
+        <span class="pub-time">{{ article.published_str }}</span>
+      </div>
+      {% if article.summary %}
+      <p class="summary">{{ article.summary }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+
+<footer>
+  Generated automatically · <a href="https://github.com" style="color: var(--accent);">View on GitHub</a>
+</footer>
+
+</body>
+</html>

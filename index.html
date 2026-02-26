@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cameron's Daily Tech & Security Digest</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #4f8ef7;
+      --accent-dim: #1e3a6e;
+      --text: #e2e4ed;
+      --muted: #7b7f96;
+      --security: #f97316;
+      --tech: #22d3ee;
+      --tag-bg: #1e2535;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      max-width: 860px;
+      margin: 0 auto 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    header .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    header .stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .stat strong {
+      color: var(--text);
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    /* Category nav */
+    .category-nav {
+      max-width: 860px;
+      margin: 0 auto 2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .cat-btn:hover, .cat-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Category section */
+    .category-section {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .category-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+    }
+
+    .category-label.Security { background: rgba(249,115,22,0.15); color: var(--security); }
+    .category-label.Tech     { background: rgba(34,211,238,0.12); color: var(--tech); }
+
+    .category-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Article cards */
+    .articles {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .article {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      transition: border-color 0.15s;
+    }
+
+    .article:hover { border-color: var(--accent-dim); }
+
+    .article-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .article a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.93rem;
+      font-weight: 500;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .article a:hover { color: var(--accent); }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .source-tag {
+      font-size: 0.72rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .pub-time {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .summary {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      max-width: 860px;
+      margin: 3rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Cameron's Daily Tech & Security Digest</h1>
+  <p class="meta">Last updated Thursday, February 26 2026 · 9:53 AM EST · Articles from the past 24 hours</p>
+  <div class="stats">
+    <div class="stat"><strong>51</strong> articles</div>
+    
+    <div class="stat"><strong>30</strong> Tech</div>
+    
+    <div class="stat"><strong>21</strong> Security</div>
+    
+  </div>
+</header>
+
+<nav class="category-nav">
+  
+  <a class="cat-btn" href="#Tech">Tech</a>
+  
+  <a class="cat-btn" href="#Security">Security</a>
+  
+</nav>
+
+
+<section class="category-section" id="Tech">
+  <div class="category-header">
+    <span class="category-label Tech">Tech</span>
+    <span class="category-count">30 articles</span>
+  </div>
+
+  <div class="articles">
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/ai-artificial-intelligence/885200/anthropic-retired-claude-given-a-substack" target="_blank" rel="noopener">Anthropic gives its retired Claude AI a Substack</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">2:21 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">In January, Anthropic "retired" Claude 3 Opus, which at one time was the company's most powerful AI model. Today, it's back - and writing on Substack. The newsletter, called Claude's Corner, will give Opus 3 space to publish its "musings, insights, or creative works," Anthropic s…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/health/2026/02/15-state-attorneys-general-sue-rfk-jr-over-anti-science-vaccine-policy/" target="_blank" rel="noopener">15 state attorneys general sue RFK Jr. over "anti-science" vaccine policy</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">2:14 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Trump administration’s reduced vaccine schedule “throws science out the window.”</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/cars/2026/02/2026-subaru-uncharted-first-drive-fwd-might-be-the-biggest-selling-point/" target="_blank" rel="noopener">Badge engineering could be worse than this: The 2026 Subaru Uncharted</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">2:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Subaru has a new EV using the platform it shares with Toyota, starting at $34,995.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/space/2026/02/ula-isnt-making-the-space-forces-gps-interference-problem-any-easier/" target="_blank" rel="noopener">ULA isn't making the Space Force's GPS interference problem any easier</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">1:31 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Officials expect the investigation into a booster anomaly on ULA's Vulcan rocket to last multiple months.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/ai-artificial-intelligence/884911/burger-king-ai-assistant-patty" target="_blank" rel="noopener">Burger King will use AI to check if employees say ‘please’ and ‘thank you’</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">1:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Burger King is launching an AI chatbot that will live in the headsets used by employees. The voice-enabled chatbot, called "Patty," is part of an overarching BK Assistant platform that will not only assist employees with meal preparation but also evaluate their interactions with …</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/tech/885002/aliro-smart-lock-standard-launches-apple-google-samsung-promise-support" target="_blank" rel="noopener">The smart lock standard that could replace your keys is finally here</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">1:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Aliro has officially arrived. The smart lock standard, first announced in 2023, finally has a 1.0 spec, meaning companies can now get hardware certified and roll out support. Aliro is an open standard designed to let any smart lock be unlocked by any smartphone, regardless of man…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/gallery/best-ski-clothes/" target="_blank" rel="noopener">Best Tested Ski Clothes (2026): Shells, Jackets, Wool Socks</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">12:30 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">From weatherproof jackets and pants to puffers, gloves, and socks, WIRED’s winter sports experts have got you covered.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/whos-your-daddy-a-chatbot/" target="_blank" rel="noopener">Who’s Your Daddy? A Chatbot</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">12:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">More people are turning to AI to explore their BDSM fantasies, but some in the community feel it’s a cop-out.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/tech/885110/meta-instagram-parent-alert-teen-self-harm-suicide" target="_blank" rel="noopener">Instagram will alert parents if their kids &#8216;repeatedly&#8217; search for self-harm topics</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">12:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Starting next week, Instagram will notify parents to check on their teen searching for terms related to self-harm or suicide. Meta says a similar alert system for its AI chatbots is coming later this year. The new Instagram feature sends parents an alert when their child "repeate…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/best-headphones/" target="_blank" rel="noopener">The Best Headphones I’ve Tried (and Why I'd Buy Them All)</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">11:30 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">The portable listening revolution is fully underway. From open earbuds to noise cancelers and wired headphones, I can find a reason to love them all.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/tech/885113/google-swallows-ai-robotics-moonshot-intrinsic" target="_blank" rel="noopener">Google takes control of ‘Android of robotics’ project in quest for physical AI</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">11:06 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Google is folding Alphabet's AI robotics "moonshot," Intrinsic, into the company after five years as an independent unit. The move marks a strategic shift as Google doubles down on physical AI and pulls experimental projects closer to its core business. Intrinsic "graduated" into…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/why-sierra-the-supercomputer-had-to-die/" target="_blank" rel="noopener">Why Sierra the Supercomputer Had to Die</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">11:00 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">For seven years, she ran high-security nuclear simulations for the US government. Now, this famous supercomputer is being put to death.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/factor-meal-delivery-service-2026/" target="_blank" rel="noopener">Factor Offers High Protein Meal Delivery Options (2026)</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">10:30 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Even if you're incredibly busy, you can maintain your gains by eating the equivalent of the microwaveable chicken in The Fifth Element.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/turbotax-coupon/" target="_blank" rel="noopener">TurboTax Service Codes: Up to 20% Off | February 2026</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">6:05 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Tax season doesn’t have to be stressful. Save up to 20% on federal tax filings, $40 off Expert Assist, and more exclusive TurboTax discount codes on WIRED.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/paramount-plus-coupon-code/" target="_blank" rel="noopener">Paramount Plus Coupon Codes and Deals: 50% Off</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">6:00 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Save on streaming with the latest Paramount+ promo codes and deals, including 50% off subscriptions, free trials, and more.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/games/884978/valve-lawsuit-loot-boxes-new-york-attorney-general-lawsuit" target="_blank" rel="noopener">New York sues Valve, alleging its loot boxes are ‘quintessential gambling’</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">11:22 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">New York Attorney General Letitia James is suing Valve for "illegally promoting gambling" through the loot box systems it has built for video games like Counter-Strike 2, Team Fortress 2, and Dota 2, according to a press release. The attorney general seeks to "permanently stop Va…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/gadgets/883733/samsung-galaxy-s26-vs-plus-ultra-specs-features-hardware-comparison" target="_blank" rel="noopener">How the new Galaxy S26 phones compare</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">10:26 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Samsung has just announced its new Galaxy S26 lineup, which includes the S26, S26 Plus, and S26 Ultra. While they aren't radical departures from last year's models, they bring a handful of notable upgrades. All three run on Qualcomm's Galaxy-centric Snapdragon 8 Elite Gen 5, whic…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/tech-policy/2026/02/judge-xai-cant-claim-openai-stole-trade-secrets-just-by-hiring-ex-staffers/" target="_blank" rel="noopener">Musk has no proof OpenAI stole xAI trade secrets, judge rules, tossing lawsuit</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">10:09 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Even twisting an ex-employee's text to favor xAI's reading fails to sway judge.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/news/884824/corsair-ending-drop-shopping-site" target="_blank" rel="noopener">Corsair is halting Drop sales after March 25th</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">9:58 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The Drop store, which was acquired by gaming gear giant Corsair in 2023, was a haven for mechanical keyboard enthusiasts and audiophiles to discover and buy hard-to-find gear - sometimes at surprisingly good prices. The company will cease sales after March 25th at 11:59PM PT, whi…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/gadgets/2026/02/samsung-reveals-galaxy-s26-lineup-with-privacy-display-and-exclusive-gemini-smarts/" target="_blank" rel="noopener">The Galaxy S26 is faster, more expensive, and even more chock-full of AI</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">9:41 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Samsung's Galaxy S26 series is available for preorder today and ships on March 11.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/everyone-speaks-incel-now/" target="_blank" rel="noopener">Everyone Speaks Incel Now</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">8:59 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">After migrating from misogynist forums to social media feeds, terms like “looksmaxxing” and “mogged” are now impossible to avoid.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/tech-policy/2026/02/judge-doesnt-trust-doj-with-search-of-devices-seized-from-wash-post-reporter/" target="_blank" rel="noopener">Judge doesn't trust DOJ with search of devices seized from Wash. Post reporter</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">8:53 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Court to search devices itself instead of letting government have full access.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/policy/884625/peace-corps-tech-promote-american-ai" target="_blank" rel="noopener">The Peace Corps is recruiting volunteers to sell AI to developing nations</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">8:45 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">For more than six decades, the Peace Corps has represented itself as an agency focused on helping underserved communities around the globe. But a new initiative, called the "Tech Corps," threatens to unravel the agency's original mission by recruiting de facto Silicon Valley sale…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.theverge.com/science/884191/ai-data-center-energy-state-of-the-union-trump" target="_blank" rel="noopener">Trump claims tech companies will sign deals next week to pay for their own power supply</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Verge</span>
+        <span class="pub-time">8:37 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">President Donald Trump tried to quell Americans' concerns about rising electricity costs during his State of the Union speech - and now we're learning that the deals he promised could land next week. Trump claimed that he's negotiated a "rate payer protection pledge" with major t…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/openai-hires-riley-walz/" target="_blank" rel="noopener">Riley Walz, the Jester of Silicon Valley, Is Joining OpenAI</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">7:59 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The software engineer is famous for his online stunts. Now he’s joining the company behind ChatGPT to work on new ways for humans to use AI systems.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/health/2026/02/could-a-vaccine-prevent-dementia-shingles-shot-data-only-getting-stronger/" target="_blank" rel="noopener">Could a vaccine prevent dementia? Shingles shot data only getting stronger.</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">7:29 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Latest data hints that benefits seen so far could be underestimates.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.wired.com/story/openclaw-users-bypass-anti-bot-systems-cloudflare-scrapling/" target="_blank" rel="noopener">OpenClaw Users Are Allegedly Bypassing Anti-Bot Systems</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Wired</span>
+        <span class="pub-time">7:00 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">An open source project called Scrapling is gaining traction with AI agent users who want their bots to scrape sites without permission.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/cars/2026/02/2026-lexus-rz-550e-review-likable-but-it-needs-improvement/" target="_blank" rel="noopener">2026 Lexus RZ 550e review: Likable, but it needs improvement</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">6:27 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">It's not very efficient, and the synthetic gearshifts aren't great, but I liked it?</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/gadgets/2026/02/ram-now-represents-35-percent-of-bill-of-materials-for-hp-pcs/" target="_blank" rel="noopener">RAM now represents 35 percent of bill of materials for HP PCs</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">6:21 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">RAM represented about 15 to 18 percent of PC costs last quarter, HP said.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://arstechnica.com/health/2026/02/rfk-jr-ally-casey-means-faces-senate-for-surgeon-general-confirmation-hearing/" target="_blank" rel="noopener">Trump's MAHA influencer pick for surgeon general goes before Senate</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Ars Technica</span>
+        <span class="pub-time">3:46 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Casey Means holds no active medical license and promotes alternative medicine.</p>
+      
+    </div>
+    
+  </div>
+</section>
+
+<section class="category-section" id="Security">
+  <div class="category-header">
+    <span class="category-label Security">Security</span>
+    <span class="category-count">21 articles</span>
+  </div>
+
+  <div class="articles">
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/ransomware-payment-rate-drops-to-record-low-despite-attack-surge/" target="_blank" rel="noopener">Ransomware payment rate drops to record low as attacks surge</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">2:00 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">The number of ransomware victims paying threat actors has dropped to 28% last year, an all-time low, despite a significant increase in the number of claimed attacks. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/microsoft-expands-windows-restore-to-more-enterprise-devices/" target="_blank" rel="noopener">Microsoft expands Windows restore to more enterprise devices</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">1:04 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Microsoft now allows more enterprise users to restore their personal settings and Microsoft Store apps from a previous Windows 11 device. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/expert-recommends-prepare-for-pqc-right.html" target="_blank" rel="noopener">Expert Recommends: Prepare for PQC Right Now</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">12:06 PM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Introduction: Steal It Today, Break It in a Decade Digital evolution is unstoppable, and though the pace may vary, things tend to fall into place sooner rather than later. That, of course, applies to adversaries as well. The rise of ransomware and cyber extortion generated fundin…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/gaming/new-york-sues-valve-for-promoting-illegal-gambling-via-game-loot-boxes/" target="_blank" rel="noopener">New York sues Valve for promoting illegal gambling via game loot boxes</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">11:44 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">New York Attorney General Letitia James sued video game developer and publisher Valve Corporation for using game loot boxes to facilitate illegal gambling activities among children and teenagers. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/fake-nextjs-repos-target-developers.html" target="_blank" rel="noopener">Microsoft Warns Developers of Fake Next.js Job Repos Delivering In-Memory Malware</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">10:35 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">A "coordinated developer-targeting campaign" is using malicious repositories disguised as legitimate Next.js projects and technical assessments to trick victims into executing them and establish persistent access to compromised machines. "The activity aligns with a broader cluste…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/malicious-stripeapi-nuget-package.html" target="_blank" rel="noopener">Malicious StripeApi NuGet Package Mimicked Official Library and Stole API Tokens</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">10:09 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">Cybersecurity researchers have disclosed details of a new malicious package discovered on the NuGet Gallery, impersonating a library from financial services firm Stripe in an attempt to target the financial sector. The package, codenamed StripeApi.Net, attempts to masquerade as S…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/cisco-sd-wan-zero-day-cve-2026-20127.html" target="_blank" rel="noopener">Cisco SD-WAN Zero-Day CVE-2026-20127 Exploited Since 2023 for Admin Access</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">6:13 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">A newly disclosed maximum-severity security flaw in Cisco Catalyst SD-WAN Controller (formerly vSmart) and Catalyst SD-WAN Manager (formerly vManage) has come under active exploitation in the wild as part of malicious activity that dates back to 2023. The vulnerability, tracked a…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.darkreading.com/cyberattacks-data-breaches/chinese-police-chatgpt-smear-japan-pm-takaichi" target="_blank" rel="noopener">Chinese Police Use ChatGPT to Smear Japan PM Takaichi</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Dark Reading</span>
+        <span class="pub-time">12:00 AM · Feb 26</span>
+      </div>
+      
+      <p class="summary">A Chinese keyboard warrior inadvertently leaked information about politically motivated influence operations through a ChatGPT account.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/medical-device-maker-ufp-technologies-warns-of-data-stolen-in-cyberattack/" target="_blank" rel="noopener">Medical device maker UFP Technologies warns of data stolen in cyberattack</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">11:02 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">American manufacturer of medical devices, UFP Technologies, has disclosed that a cybersecurity incident has compromised its IT systems and data. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.darkreading.com/application-security/flaws-claude-code-developer-machines-risk" target="_blank" rel="noopener">Flaws in Claude Code Put Developers' Machines at Risk</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Dark Reading</span>
+        <span class="pub-time">10:02 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The vulnerabilities highlight a big drawback to integrating AI into software development workflows and the potential impact on supply chains.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/fake-nextjs-job-interview-tests-backdoor-developers-devices/" target="_blank" rel="noopener">Fake Next.js job interview tests backdoor developer's devices</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">9:47 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The Microsoft Defender team has discovered a coordinated campaign targeting software developers through malicious repositories posing as legitimate Next.js projects and technical assessment materials, including recruiting coding tests. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.darkreading.com/threat-intelligence/ramp-forum-seizure-fractures-ransomware-ecosystem" target="_blank" rel="noopener">RAMP Forum Seizure Fractures Ransomware Ecosystem</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Dark Reading</span>
+        <span class="pub-time">9:14 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Researchers suggest defenders monitor how these malicious groups re-form and leverage the useful threat intel to guide their next moves.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.darkreading.com/cyber-risk/pci-council-threats-payments-systems-speeding-up" target="_blank" rel="noopener">PCI Council Says Threats to Payments Systems Are Speeding Up</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Dark Reading</span>
+        <span class="pub-time">7:15 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The PCI Security Standards Council experienced a record year in many regards, but its first annual report shows it needs to work even faster to stay ahead of attackers.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/critical-cisco-sd-wan-bug-exploited-in-zero-day-attacks-since-2023/" target="_blank" rel="noopener">Critical Cisco SD-WAN bug exploited in zero-day attacks since 2023</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">6:01 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Cisco is warning that a critical authentication bypass vulnerability in Cisco Catalyst SD-WAN, tracked as CVE-2026-20127, was actively exploited in zero-day attacks that allowed remote attackers to compromise controllers and add malicious rogue peers to targeted networks. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/google-disrupts-unc2814-gridtide.html" target="_blank" rel="noopener">Google Disrupts UNC2814 GRIDTIDE Campaign After 53 Breaches Across 42 Countries</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">5:46 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Google on Wednesday disclosed that it worked with industry partners to disrupt the infrastructure of a suspected China-nexus cyber espionage group tracked as UNC2814 that breached at least 53 organizations across 42 countries. "This prolific, elusive actor has a long history of t…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/chinese-cyberspies-breached-dozens-of-telecom-firms-govt-agencies/" target="_blank" rel="noopener">Chinese cyberspies breached dozens of telecom firms, govt agencies</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">5:00 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Google's Threat Intelligence Group (GTIG), Mandiant, and partners disrupted a global espionage campaign attributed to a suspected Chinese threat actor that used SaaS API calls to hide malicious traffic in attacks targeting telecom and government networks. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/claude-code-flaws-allow-remote-code.html" target="_blank" rel="noopener">Claude Code Flaws Allow Remote Code Execution and API Key Exfiltration</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">5:00 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Cybersecurity researchers have disclosed multiple security vulnerabilities in Anthropic's Claude Code, an artificial intelligence (AI)-powered coding assistant, that could result in remote code execution and theft of API credentials. "The vulnerabilities exploit various configura…</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.darkreading.com/cyberattacks-data-breaches/malicious-nextjs-repos-developers-fake-job-interviews" target="_blank" rel="noopener">Malicious Next.js Repos Target Developers Via Fake Job Interviews</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Dark Reading</span>
+        <span class="pub-time">4:42 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Linked to North Korean fake job-recruitment campaigns, the poisoned repositories are aimed at establishing persistent access to infected machines.</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/marquis-sues-sonicwall-over-backup-breach-that-led-to-ransomware-attack/" target="_blank" rel="noopener">Marquis sues SonicWall over backup breach that led to ransomware attack</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">3:54 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">Marquis Software Solutions has filed a lawsuit against SonicWall, accusing the cybersecurity company of gross negligence and misrepresentation that allegedly led to a ransomware attack disrupting operations at 74 U.S. banks. [...]</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://thehackernews.com/2026/02/slh-offers-5001000-per-call-to-recruit.html" target="_blank" rel="noopener">SLH Offers $500–$1,000 Per Call to Recruit Women for IT Help Desk Vishing Attacks</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">The Hacker News</span>
+        <span class="pub-time">3:06 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">The notorious cybercrime collective known as Scattered LAPSUS$ Hunters (SLH) has been observed offering financial incentives to recruit women to pull off social engineering attacks. The idea is to hire them for voice phishing campaigns targeting IT help desks, Dataminr said in a …</p>
+      
+    </div>
+    
+    <div class="article">
+      <div class="article-top">
+        <a href="https://www.bleepingcomputer.com/news/security/the-openclaw-hype-analysis-of-chatter-from-open-source-deep-and-dark-web/" target="_blank" rel="noopener">The OpenClaw Hype: Analysis of Chatter from Open-Source Deep and Dark Web</a>
+      </div>
+      <div class="article-meta">
+        <span class="source-tag">Bleeping Computer</span>
+        <span class="pub-time">3:01 PM · Feb 25</span>
+      </div>
+      
+      <p class="summary">OpenClaw has sparked heavy Telegram and dark web chatter, but Flare's data shows more research hype than mass exploitation. Flare explains how its telemetry found real supply-chain risk in the skills marketplace, yet limited signs of large-scale criminal operationalization. [...]</p>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<footer>
+  Generated automatically · <a href="https://github.com" style="color: var(--accent);">View on GitHub</a>
+</footer>
+
+</body>
+</html>

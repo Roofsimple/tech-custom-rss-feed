@@ -1,0 +1,40 @@
+feeds:
+  # Cybersecurity
+  - name: Krebs on Security
+    url: https://krebsonsecurity.com/feed/
+    category: Security
+
+  - name: The Hacker News
+    url: https://feeds.feedburner.com/TheHackersNews
+    category: Security
+
+  - name: Bleeping Computer
+    url: https://www.bleepingcomputer.com/feed/
+    category: Security
+
+  - name: Dark Reading
+    url: https://www.darkreading.com/rss.xml
+    category: Security
+
+  - name: CISA Alerts
+    url: https://www.cisa.gov/news.xml
+    category: Security
+
+  # Tech & Industry
+  - name: Ars Technica
+    url: https://feeds.arstechnica.com/arstechnica/index
+    category: Tech
+
+  - name: Wired
+    url: https://www.wired.com/feed/rss
+    category: Tech
+
+  - name: The Verge
+    url: https://www.theverge.com/rss/index.xml
+    category: Tech
+
+settings:
+  max_age_hours: 24        # Only show articles from the last N hours
+  max_articles_per_feed: 10
+  site_title: "Cameron's Daily Tech & Security Digest"
+  timezone: "America/New_York"
